@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Meu Diário</title>
+  <title>Diário — Noite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -54,13 +54,13 @@
       position: relative;
       z-index: 3;
       width: 96%;
-      max-width: 1000px;
+      max-width: 1200px;
       background: linear-gradient(145deg, #0f1322, var(--paper));
       border-radius: 20px;
       box-shadow: 0 30px 90px rgba(0,0,0,0.75);
-      padding: 26px;
+      padding: 30px;
       display: grid;
-      grid-template-columns: 1fr 1.25fr;
+      grid-template-columns: 0.9fr 1.6fr;
       gap: 26px;
       perspective: 1400px;
     }
@@ -155,12 +155,13 @@
 
     /* ===== PÁGINA ===== */
     .page {
-      background: #090c14;
+      background: linear-gradient(180deg, #090c14, #0b0f1c);
       border-radius: 14px;
-      padding: 18px;
+      padding: 28px 32px;
       display: flex;
       flex-direction: column;
       transform-origin: left center;
+      min-height: 520px;
     }
 
     .page.turn { animation: turn 0.9s ease-in-out; }
@@ -186,8 +187,9 @@
       border: none;
       outline: none;
       font-family: 'Courier New', monospace;
-      font-size: 14px;
-      line-height: 1.7;
+      font-size: 15px;
+      line-height: 1.9;
+      padding-right: 6px;
     }
 
     .controls {
@@ -243,7 +245,7 @@
   </audio>
 
   <div class="diary">
-    <header><h1>DIÁRIO - Raphael Gomes</h1></header>
+    <header><h1>DIÁRIO</h1></header>
 
     <div class="calendar">
       <div class="calendar-header">
