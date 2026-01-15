@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Diário R.G</title>
+  <title>Diário — Noite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -245,7 +245,7 @@
   </audio>
 
   <div class="diary">
-    <header><h1>DIÁRIO - RAPHAEL GOMES</h1></header>
+    <header><h1>DIÁRIO</h1></header>
 
     <div class="calendar">
       <div class="calendar-header">
@@ -380,8 +380,56 @@
       }
     };
 
+      /* ===== EXPORTAR / IMPORTAR ===== */
+  const exportBtn = document.getElementById('exportBtn');
+  const importBtn = document.getElementById('importBtn');
+  const importFile = document.getElementById('importFile');
+
+  exportBtn.onclick = () => {
+    const data = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (/^\d{4}-\d{2}-\d{2}$/.test(k)) {
+        data[k] = localStorage.getItem(k);
+      }
+    }
+
+    const blob = new Blob(
+      [JSON.stringify(data, null, 2)],
+      { type: 'application/json' }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'diario_backup.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  importBtn.onclick = () => importFile.click();
+
+  importFile.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        Object.keys(data).forEach(k =>
+          localStorage.setItem(k, data[k])
+        );
+        render();
+        alert('Anotações importadas com sucesso.');
+      } catch {
+        alert('Arquivo inválido.');
+      }
+    };
+    reader.readAsText(file);
+  };
+
     render();
   </script>
 </body>
 </html>
-
